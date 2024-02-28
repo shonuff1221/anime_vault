@@ -2,21 +2,21 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import AnimeCard, { AnimeProp } from "./AnimeCard";
-import { fetchAnime } from "@/app/action";
+import TokenCard from "./TokenCard";
+import { fetchTokensSB } from "@/app/action";
 
-let page = 2;
+//let page = 2;
 
-export type AnimeCard = JSX.Element;
+export type TokenCard = JSX.Element;
 function LoadMore() {
   const { ref, inView } = useInView();
-  const [data, setData] = useState<AnimeProp[]>([]);
+  const [data, setData] = useState<TokenCard[]>([]);
 
   useEffect(() => {
     if (inView) {
-      fetchAnime(page).then((res: any) => {
+      fetchTokensSB().then((res: any) => {
         setData([...data, ...res]);
-        page++;
+        //page++;
       });
     }
   }, [data, inView]);

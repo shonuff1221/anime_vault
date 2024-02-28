@@ -1,14 +1,14 @@
 "use server";
 
-import AnimeCard, { AnimeProp } from "@/components/AnimeCard";
+import TokenCard, { TokeneProp } from "@/components/TokenCard";
 
-export const fetchAnime = async (page: number) => {
+export const fetchTokensSB = async () => {
   const response = await fetch(
-    `https://no-tribe-crypto.vercel.app/api/webhook/quicknode`
+    `https://ptxsliywuzngeehkghts.supabase.co/rest/v1/TokenDexInfo?select=*&apikey=${process.env.SUPABASE_API_KEY}`
   );
   const data = await response.json();
 
-  return data.map((item: AnimeProp, index: number) => (
-    <AnimeCard key={item.id} anime={item} index={index} />
+  return data.map((item: TokeneProp, index: number) => (
+    <TokenCard key={item.baseAddress} token={item} index={index} />
   ));
 };
